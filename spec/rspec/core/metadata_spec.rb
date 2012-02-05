@@ -118,6 +118,10 @@ module RSpec
           end
         end
 
+        it "matches a proc with no arguments that evaluates to true" do
+          example_metadata.filter_applies?(:if, lambda { true }).should be_true
+        end
+
         it "matches a proc that evaluates to true" do
           example_metadata.filter_applies?(:if, lambda { |v| v }).should be_true
         end
