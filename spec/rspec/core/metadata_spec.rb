@@ -131,6 +131,12 @@ module RSpec
           example_metadata.filter_applies?(:foo, lambda { |v, m| m == example_metadata }).should be_true
         end
 
+        it "raises an error when the proc has an incorrect arity" do
+          expect {
+            example_metadata.filter_applies?(:if, lambda { |a,b,c| true })
+          }.to raise_error(ArgumentError)
+        end
+
         context "with an Array" do
           let(:metadata_with_array) {
             group_metadata.for_example('example_with_array', :tag => [:one, 2, 'three', /four/])
