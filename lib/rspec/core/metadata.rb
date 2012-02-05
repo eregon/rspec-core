@@ -182,9 +182,8 @@ module RSpec
         when Proc
           case value.arity
           when 0 then value.call
-          when 1 then value.call(metadata[key])
           when 2 then value.call(metadata[key], metadata)
-          else raise ArgumentError, "wrong number of arguments (#{value.arity} for 0..2)"
+          else value.call(metadata[key])
           end
         else
           metadata[key].to_s == value.to_s
